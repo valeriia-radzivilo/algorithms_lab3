@@ -1,5 +1,7 @@
 package db;
 
+import java.util.ArrayList;
+
 public class arr_work {
 
     public static String make_text_from_matrix(String[][] matrix)
@@ -18,25 +20,36 @@ public class arr_work {
         return  answer;
     }
 
-    public static void print_arr(db_input[]arr)
+    public static void print_arr_list(ArrayList<db_input> arr)
     {
-        for (db.db_input db_input : arr) System.out.println(db_input.toString());
+        for (db.db_input db_input : arr)
+        {
+            if(db_input!=null) System.out.println(db_input.toString());
+        }
     }
 
-    public static int[] get_indexes(db_input[]arr, int amount)
+    public static ArrayList<Integer> get_indexes(ArrayList<db_input>arr)
     {
-        int []indexes = new int[amount];
-        for (int i =0; i<amount;i++)
-            indexes[i] = arr[i].getIndex();
+        ArrayList<Integer>indexes = new ArrayList<>();
+        for (db.db_input db_input : arr) if (db_input != null) indexes.add(db_input.getIndex());
         return indexes;
     }
 
-    public static int[] get_values(db_input[]arr, int amount)
+    public static ArrayList<Integer> get_values(ArrayList<db_input>arr)
     {
-        int []indexes = new int[amount];
-        for (int i =0; i<amount;i++)
-            indexes[i] = arr[i].getValue();
+        ArrayList<Integer> indexes = new ArrayList<>();
+        for (db.db_input db_input : arr) if (db_input != null) indexes.add(db_input.getValue());
         return indexes;
+    }
+
+    public static int find_max_arr_list(ArrayList<Integer> arr)
+    {
+        int maximum = arr.get(0);
+        for (int i = 1; i < arr.size(); i++) {
+            if (maximum < arr.get(i))
+                maximum = arr.get(i);
+        }
+        return maximum;
     }
 
 
