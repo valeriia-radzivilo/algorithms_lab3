@@ -21,12 +21,29 @@ public class SparseArray {
 
     public SparseArray(){ }
 
+    public static void setOverflowing_bucket(ArrayList<db_input>arr)
+    {
+        overflowing_bucket = new ArrayList<>();
+        overflowing_bucket.addAll(arr);
+    }
+
+    public static ArrayList<db_input> getSparseArray()
+    {
+        return sparse_array;
+    }
+
+    public static ArrayList<db_input> getOverflowBucket()
+    {
+        return overflowing_bucket;
+    }
+
     public static void make_dense_sparse(SparseArray spase)
     {
         ArrayList<Integer> indexes_dense = get_all_indexes(dense_array);
         int maximum = arr_work.find_max_arr_list(indexes_dense);
         for (int i =0; i<=maximum;i++) {
             if(indexes_dense.contains(i)) {
+                sparse_array.add(dense_array.get(indexes_dense.indexOf(i)));
                 int amount_of_i =arr_work.find_amount_of_value(indexes_dense,i);
                 if(amount_of_i>1)
                 {
@@ -36,13 +53,17 @@ public class SparseArray {
                         overflowing_bucket.add(dense_array.get(indexes_dense.indexOf(i)));
                     }
                 }
-                    else
-                        sparse_array.add(dense_array.get(indexes_dense.indexOf(i)));
+
             }
             else
                 sparse_array.add(null);
 
         }
+    }
+
+    public static ArrayList<db_input> getOverflowing_bucket()
+    {
+        return overflowing_bucket;
     }
 
     public static ArrayList<Integer> get_all_indexes(ArrayList<db_input> dense_array)

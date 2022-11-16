@@ -4,22 +4,6 @@ import java.util.ArrayList;
 
 public class arr_work {
 
-    public static String make_text_from_matrix(String[][] matrix)
-    {
-        String answer = "";
-        for(int i=0; i < matrix.length;i++)
-        {
-            for(int j=0; j<matrix.length;j++)
-            {
-                answer+=matrix[i][j];
-                answer+=" ";
-            }
-            answer+="\n";
-
-        }
-        return  answer;
-    }
-
     public static void print_arr_list(ArrayList<db_input> arr)
     {
         for (db.db_input db_input : arr)
@@ -77,17 +61,6 @@ public class arr_work {
         return answer.toString();
     }
 
-    public static String make_int_array_text (ArrayList<Integer>arr)
-    {
-        StringBuilder answer = new StringBuilder();
-        for(int i:arr) {
-            answer.append(i);
-            answer.append(System.lineSeparator());
-        }
-
-
-        return answer.toString();
-    }
 
     public static ArrayList<db_input> divide_array_into_three(ArrayList<db_input>arr,int part)
     {

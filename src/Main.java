@@ -21,9 +21,12 @@ public class Main {
         System.out.println("DB:");
         arr_work.print_arr_list(sparse_get_from_db);
 
+        System.out.println("Overflow:");
+        arr_work.print_arr_list(sparseArray.getOverflowing_bucket());
+
         ArrayList<Integer> indexes = arr_work.get_indexes(sparse_get_from_db);
         ArrayList<Integer> values = arr_work.get_values(sparse_get_from_db);
-        create_frame(frame,indexes,values,sparse_get_from_db);
+        create_frame(frame,indexes,values,sparseArray);
 
 
 
