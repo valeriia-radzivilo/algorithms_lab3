@@ -23,10 +23,22 @@ public class SparseArray {
         ArrayList<Integer> indexes_dense = get_all_indexes(dense_array);
         int maximum = arr_work.find_max_arr_list(indexes_dense);
         for (int i =0; i<=maximum;i++) {
-            if(indexes_dense.contains(i))
-                sparse_array.add(i, dense_array.get(indexes_dense.indexOf(i)));
+            if(indexes_dense.contains(i)) {
+                int amount_of_i =arr_work.find_amount_of_value(indexes_dense,i);
+                if(amount_of_i>1)
+                {
+                    for(int j =0; j<amount_of_i;j++) {
+                        sparse_array.add(dense_array.get(indexes_dense.indexOf(i)));
+                        dense_array.set(indexes_dense.indexOf(i),new db_input(maximum+1,maximum+1));
+                        indexes_dense = get_all_indexes(dense_array);
+
+                    }
+                }
+                    else
+                        sparse_array.add(dense_array.get(indexes_dense.indexOf(i)));
+            }
             else
-                sparse_array.add(i, null);
+                sparse_array.add(null);
 
         }
     }
@@ -40,5 +52,14 @@ public class SparseArray {
 
         return answer;
 
+    }
+
+    public static ArrayList<db_input> make_sparse_dense(ArrayList<db_input>sparse)
+    {
+        ArrayList<db_input> dense = new ArrayList<>();
+        for(db_input i : sparse)
+            if(i != null)
+                dense.add(i);
+        return dense;
     }
 }

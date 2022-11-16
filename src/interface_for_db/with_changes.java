@@ -28,6 +28,6 @@ public class with_changes {
 //        arr_work.print_arr_list(get_from_db);
         ArrayList<Integer> indexes = arr_work.get_indexes(get_from_db);
         ArrayList<Integer> values = arr_work.get_values(get_from_db);
-        create_frame(frame,indexes,values);
+        create_frame(frame,indexes,values,get_from_db);
     }
 }

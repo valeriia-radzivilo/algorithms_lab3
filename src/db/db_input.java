@@ -1,11 +1,14 @@
 package db;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class db_input implements Serializable {
 
     int index;
     int value;
+
+
 
     public db_input(int index, int value)
     {
@@ -14,7 +17,7 @@ public class db_input implements Serializable {
     }
 
     public String toString() {
-        return "Index:" + index + "\nValue: " + value;
+        return index + "  " + value;
     }
 
     public int getIndex()

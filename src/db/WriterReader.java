@@ -24,7 +24,7 @@ public class WriterReader {
             for(int i =0; i<amount_input;i++)
             {
                 Random value = new Random();
-                    db_input input = new db_input(value.nextInt(10+i), value.nextInt(10000));
+                    db_input input = new db_input(value.nextInt(amount_input+i), value.nextInt(10000));
                 // Write objects to file
                 o.writeObject(input);
             }

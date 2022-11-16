@@ -52,5 +52,60 @@ public class arr_work {
         return maximum;
     }
 
+    public static int find_amount_of_value(ArrayList<Integer>arr, int value)
+    {
+        int count = 0;
+        for(int i =0;i <arr.size();i++)
+        {
+            if(arr.get(i)==value)
+                count++;
+        }
+        return count;
+    }
+
+    public static String make_array_text (ArrayList<db_input>arr)
+    {
+        StringBuilder answer = new StringBuilder();
+        for(db_input i:arr) {
+            if(i!=null) {
+                answer.append(i.toString());
+                answer.append(System.lineSeparator());
+            }
+        }
+
+
+        return answer.toString();
+    }
+
+    public static String make_int_array_text (ArrayList<Integer>arr)
+    {
+        StringBuilder answer = new StringBuilder();
+        for(int i:arr) {
+            answer.append(i);
+            answer.append(System.lineSeparator());
+        }
+
+
+        return answer.toString();
+    }
+
+    public static ArrayList<db_input> divide_array_into_two(ArrayList<db_input>arr,int part)
+    {
+        arr = SparseArray.make_sparse_dense(arr);
+        ArrayList<db_input> answer = new ArrayList<>();
+        if(part == 1)
+        {
+            for(int i =0;i<arr.size()/2;i++)
+            {
+                answer.add(arr.get(i));
+            }
+        }
+        else
+            for(int i =arr.size()/2;i<arr.size();i++)
+            {
+                answer.add(arr.get(i));
+            }
+            return answer;
+    }
 
 }

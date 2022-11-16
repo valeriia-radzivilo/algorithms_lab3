@@ -12,7 +12,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class db_interface {
 
-    public static void create_frame(JFrame frame, ArrayList<Integer>indexes, ArrayList<Integer>values)
+    public static void create_frame(JFrame frame, ArrayList<Integer>indexes, ArrayList<Integer>values, ArrayList<db_input>full_db)
     {
         JPanel panel = new JPanel();
         panel.setAutoscrolls(true);
@@ -28,7 +28,9 @@ public class db_interface {
 
         panel.add(l,c);
 
-        show_db(panel,c, indexes,values);
+        show_db(panel,c, full_db);
+
+        find_by_key(panel,c,full_db);
 
 
 
@@ -57,36 +59,39 @@ public class db_interface {
 
 
 
-
-
-
-
-
-
-
         frame.add(panel);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE );
         frame.pack();
         frame.setLocationRelativeTo( null );
         frame.setVisible(true);
-        frame.setSize(600, 600);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        frame.setSize(screenSize.width, screenSize.height);
 
     }
 
-    static void show_db(JPanel panel, GridBagConstraints c, ArrayList<Integer> indexes , ArrayList<Integer> values)
+    static void show_db(JPanel panel, GridBagConstraints c, ArrayList<db_input> db)
     {
 
-            for(int j =0; j<indexes.size();j++) {
-                c.gridx = 1;
-                c.gridy = j+1;
-                panel.add(new JLabel(Integer.toString(indexes.get(j))+"     "),c);
-            }
+        c.gridx=1;
+        c.gridy=2;
 
-        for(int j =0; j<values.size();j++) {
-            c.gridx = 3;
-            c.gridy = j+1;
-            panel.add(new JLabel(Integer.toString(values.get(j))),c);
-        }
+        ArrayList<db_input> part_1 = arr_work.divide_array_into_two(db,1);
+        String part_1_str = arr_work.make_array_text(part_1);
+        JTextArea part_1_text = new JTextArea(part_1_str);
+        part_1_text.setEditable(false);
+        panel.add(part_1_text,c);
+
+        c.gridx=2;
+        c.gridy=2;
+
+        ArrayList<db_input> part_2 = arr_work.divide_array_into_two(db,2);
+        String part_2_str = arr_work.make_array_text(part_2);
+        JTextArea part_2_text = new JTextArea(part_2_str);
+        part_2_text.setEditable(false);
+        panel.add(part_2_text,c);
+
+
+
 
     }
 
@@ -187,7 +192,71 @@ public class db_interface {
     }
 
 
+    public static void find_by_key(JPanel panel, GridBagConstraints c,ArrayList<db_input>arr)
+    {
 
+        c.gridx = 0;
+        c.gridy = arr.size()+5;
+        final JLabel[] text_find = {new JLabel("FIND BY KEY: ")};
+        panel.add(text_find[0],c);
+
+        c.gridx = 1;
+        c.gridy = arr.size()+5;
+
+        JTextField input_key = new JTextField("key");
+        panel.add(input_key,c);
+
+        c.gridx = 2;
+        c.gridy = arr.size()+5;
+        JButton b_find=new JButton("FIND");
+        b_find.setBounds(50,100,95,30);
+        JTextArea text_find_result = new JTextArea();
+        text_find_result.setEditable(false);
+
+        b_find.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.updateComponentTreeUI(panel);
+                String str_us_key = input_key.getText();
+                if (!input_key.equals("key")) {
+                    ArrayList<db_input>arr_copy = new ArrayList<>(arr);
+
+                    SwingUtilities.updateComponentTreeUI(panel);
+                    int user_key = Integer.parseInt(str_us_key);
+                    db_input search_res = new db_input(1,1);
+                    ArrayList<db_input>answers = new ArrayList<>();
+                    while (search_res!=null) {
+                        search_res = BinarySearch.binarySearch(arr_copy, user_key);
+                        answers.add(search_res);
+                        arr_copy.remove(search_res);
+
+
+                    }
+                    answers.remove(answers.size()-1);
+
+
+                    c.gridx = 2;
+                    c.gridy = arr.size()+6;
+
+                    if(!answers.isEmpty())
+                    {
+                        String answer = arr_work.make_array_text(answers);
+                        text_find_result.setText("Found:  \n" + answer);
+                    }
+                    else
+                    {
+                        text_find_result.setText("NOT FOUND");
+                    }
+                    panel.add(text_find_result,c);
+
+
+                }
+            }
+
+        });
+        panel.add(b_find,c);
+
+
+    }
 
 
 
