@@ -23,7 +23,8 @@ public class with_changes {
 
 
         ArrayList<db_input>get_from_db = new ArrayList<>();
-        SparseArray.make_dense_sparse(from_file,get_from_db);
+        SparseArray sparseArray = new SparseArray(from_file,get_from_db);
+        SparseArray.make_dense_sparse(sparseArray);
 //        System.out.println("DB:");
 //        arr_work.print_arr_list(get_from_db);
         ArrayList<Integer> indexes = arr_work.get_indexes(get_from_db);

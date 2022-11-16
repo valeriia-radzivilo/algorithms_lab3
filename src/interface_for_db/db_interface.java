@@ -75,7 +75,7 @@ public class db_interface {
         c.gridx=1;
         c.gridy=2;
 
-        ArrayList<db_input> part_1 = arr_work.divide_array_into_two(db,1);
+        ArrayList<db_input> part_1 = arr_work.divide_array_into_three(db,1);
         String part_1_str = arr_work.make_array_text(part_1);
         JTextArea part_1_text = new JTextArea(part_1_str);
         part_1_text.setEditable(false);
@@ -84,11 +84,20 @@ public class db_interface {
         c.gridx=2;
         c.gridy=2;
 
-        ArrayList<db_input> part_2 = arr_work.divide_array_into_two(db,2);
+        ArrayList<db_input> part_2 = arr_work.divide_array_into_three(db,2);
         String part_2_str = arr_work.make_array_text(part_2);
         JTextArea part_2_text = new JTextArea(part_2_str);
         part_2_text.setEditable(false);
         panel.add(part_2_text,c);
+
+        c.gridx=3;
+        c.gridy=2;
+
+        ArrayList<db_input> part_3 = arr_work.divide_array_into_three(db,3);
+        String part_3_str = arr_work.make_array_text(part_3);
+        JTextArea part_3_text = new JTextArea(part_3_str);
+        part_3_text.setEditable(false);
+        panel.add(part_3_text,c);
 
 
 
@@ -178,17 +187,6 @@ public class db_interface {
 
 
 
-        c.gridx = 2;
-        c.gridy = values.size()+4;
-        JButton b_ref=new JButton("Refresh");
-        b_ref.setBounds(50,100,95,30);
-        panel.add(b_ref,c);
-        b_ref.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                SwingUtilities.updateComponentTreeUI(panel);
-
-
-            }});
     }
 
 

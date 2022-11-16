@@ -89,23 +89,29 @@ public class arr_work {
         return answer.toString();
     }
 
-    public static ArrayList<db_input> divide_array_into_two(ArrayList<db_input>arr,int part)
+    public static ArrayList<db_input> divide_array_into_three(ArrayList<db_input>arr,int part)
     {
         arr = SparseArray.make_sparse_dense(arr);
         ArrayList<db_input> answer = new ArrayList<>();
         if(part == 1)
         {
-            for(int i =0;i<arr.size()/2;i++)
+            for(int i =0;i<arr.size()/3;i++)
             {
                 answer.add(arr.get(i));
             }
         }
-        else
-            for(int i =arr.size()/2;i<arr.size();i++)
-            {
+        else if(part==2) {
+            for (int i = arr.size() / 3; i < 2 * arr.size() / 3; i++) {
                 answer.add(arr.get(i));
             }
-            return answer;
+
+        }
+        else{
+            for (int i = 2* arr.size() / 3; i < arr.size(); i++) {
+                answer.add(arr.get(i));
+            }
+        }
+        return answer;
     }
 
 }
