@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e96ada37-bf38-4492-9d63-eb96f134183a" name="Changes" comment="deleted refresh button + changes in SparseArray">
+    <list default="true" id="e96ada37-bf38-4492-9d63-eb96f134183a" name="Changes" comment="added edit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/BinarySearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/BinarySearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/db/SerializationUtil.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db/SparseArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/SparseArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/db/arr_work.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/arr_work.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_for_db/db_interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_for_db/db_interface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interface_for_db/with_changes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_for_db/with_changes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +62,7 @@
       <workItem from="1668533920206" duration="3311000" />
       <workItem from="1668546652072" duration="8509000" />
       <workItem from="1668608496023" duration="5708000" />
-      <workItem from="1668632430929" duration="1892000" />
+      <workItem from="1668632430929" duration="3872000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <created>1668262636573</created>
@@ -92,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668610236630</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added edit">
+      <created>1668634810913</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668634810913</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,7 +121,8 @@
     <MESSAGE value="added interface" />
     <MESSAGE value="need to add overflow (everything else is working the right way)" />
     <MESSAGE value="deleted refresh button + changes in SparseArray" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted refresh button + changes in SparseArray" />
+    <MESSAGE value="added edit" />
+    <option name="LAST_COMMIT_MESSAGE" value="added edit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

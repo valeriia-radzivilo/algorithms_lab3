@@ -1,9 +1,6 @@
 package db;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class SparseArray {
 
@@ -37,7 +34,7 @@ public class SparseArray {
         return overflowing_bucket;
     }
 
-    public static void make_dense_sparse(SparseArray spase)
+    public static void make_dense_sparse()
     {
         ArrayList<Integer> indexes_dense = get_all_indexes(dense_array);
         int maximum = arr_work.find_max_arr_list(indexes_dense);

@@ -24,7 +24,7 @@ public class with_changes {
 
         ArrayList<db_input>get_from_db = new ArrayList<>();
         SparseArray sparseArray = new SparseArray(from_file,get_from_db);
-        SparseArray.make_dense_sparse(sparseArray);
+        SparseArray.make_dense_sparse();
 
         System.out.println("Overflow:");
         arr_work.print_arr_list(sparseArray.getOverflowing_bucket());

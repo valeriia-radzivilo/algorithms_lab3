@@ -1,5 +1,4 @@
 import db.*;
-import interface_for_db.*;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -17,7 +16,7 @@ public class Main {
 
         SparseArray sparseArray = new SparseArray(get_from_db,sparse_get_from_db);
 
-        SparseArray.make_dense_sparse(sparseArray);
+        SparseArray.make_dense_sparse();
         System.out.println("DB:");
         arr_work.print_arr_list(sparse_get_from_db);
 
