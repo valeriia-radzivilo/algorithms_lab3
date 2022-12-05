@@ -120,20 +120,21 @@ public class db_interface {
                     int user_value = Integer.parseInt(str_us_value);
                     db_input user_input = new db_input(user_index, user_value);
                     ArrayList<db_input>new_db =new ArrayList<>();
-                    for(int i =0; i<indexes.size();i++)
-                    {
-                        db_input input = new db_input(indexes.get(i),values.get(i));
-                        new_db.add(input);
-                    }
-                    new_db.add(user_input);
-                    try {
-                        frame.setVisible(false);
-                        frame.dispose();
+                    if(!indexes.contains(user_index)) {
+                        for (int i = 0; i < indexes.size(); i++) {
+                            db_input input = new db_input(indexes.get(i), values.get(i));
+                            new_db.add(input);
+                        }
+                        new_db.add(user_input);
+                        try {
+                            frame.setVisible(false);
+                            frame.dispose();
 
-                        WriterReader.write_to_db(new_db);
-                        with_changes.add_changes(new_db);
-                    } catch (IOException | ClassNotFoundException ex) {
-                        throw new RuntimeException(ex);
+                            WriterReader.write_to_db(new_db);
+                            with_changes.add_changes(new_db);
+                        } catch (IOException | ClassNotFoundException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
 
 
@@ -217,15 +218,13 @@ public class db_interface {
                             db_input input = new db_input(indexes.get(i), values.get(i));
                             if(i!=del_index)
                                 new_db.add(input);
-                            else if(index_over.contains(user_index)) {
-                                int ind = index_over.indexOf(user_index);
-                                input = new db_input(user_index,value_over.get(ind));
-                                new_db.add(input);
-                                overflow_bucket.remove(ind);
+                            else if(overflow_bucket.size()>0){
+                                new_db.add(overflow_bucket.get(0));
+                                overflow_bucket.remove(0);
                             }
 
                         }
-                        sparseArray.setOverflowing_bucket(overflow_bucket);
+                        SparseArray.setOverflowing_bucket(overflow_bucket);
                         try {
                             frame.setVisible(false);
                             frame.dispose();

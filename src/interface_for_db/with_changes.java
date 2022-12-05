@@ -16,6 +16,7 @@ public class with_changes {
 
     public static void add_changes(ArrayList<db_input> new_db) throws IOException, ClassNotFoundException {
         JFrame frame= new JFrame("DB");
+        WriterReader.setAmount_of_records(new_db.size());
         ArrayList<db_input> from_file = WriterReader.read_file(new_db.size());
         System.out.println("DB AFTER CHANGES");
         System.out.println("---------");
@@ -25,6 +26,7 @@ public class with_changes {
         ArrayList<db_input>get_from_db = new ArrayList<>();
         SparseArray sparseArray = new SparseArray(from_file,get_from_db);
         SparseArray.make_dense_sparse();
+        System.out.println("SPARSE SIZE: "+ SparseArray.sparse_array.size());
 
         System.out.println("Overflow:");
         arr_work.print_arr_list(sparseArray.getOverflowing_bucket());

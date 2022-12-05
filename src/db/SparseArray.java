@@ -7,8 +7,9 @@ public class SparseArray {
     static ArrayList<db_input> overflowing_bucket = new ArrayList<>();
 
     static ArrayList<db_input> dense_array = new ArrayList<>();
-    static ArrayList<db_input> sparse_array = new ArrayList<>();
+    public static ArrayList<db_input> sparse_array = new ArrayList<>();
 
+    static int amount_of_records = 100;
 
     public SparseArray(ArrayList<db_input> dense_array, ArrayList<db_input> sparse_array)
     {
@@ -40,22 +41,13 @@ public class SparseArray {
         int maximum = arr_work.find_max_arr_list(indexes_dense);
         for (int i =0; i<=maximum;i++) {
             if(indexes_dense.contains(i)) {
-                sparse_array.add(dense_array.get(indexes_dense.indexOf(i)));
-                int amount_of_i =arr_work.find_amount_of_value(indexes_dense,i);
-                if(amount_of_i>1)
-                {
-                    for(int j =1; j<amount_of_i;j++) {
-                        dense_array.set(indexes_dense.indexOf(i),new db_input(maximum+1,maximum+1));
-                        indexes_dense = get_all_indexes(dense_array);
-                        overflowing_bucket.add(dense_array.get(indexes_dense.indexOf(i)));
-                    }
-                }
-
+                if (sparse_array.size() >= amount_of_records) {
+                    overflowing_bucket.add(dense_array.get(indexes_dense.indexOf(i)));
+                } else sparse_array.add(dense_array.get(indexes_dense.indexOf(i)));
             }
-            else
-                sparse_array.add(null);
-
         }
+
+
     }
 
     public static ArrayList<db_input> getOverflowing_bucket()

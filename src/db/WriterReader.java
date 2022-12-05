@@ -3,61 +3,82 @@ package db;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class WriterReader {
     static final String pathname = "lab3_db.obj";
+    static int amount_of_records;
 
     public static String get_filepath()
     {
         return pathname;
     }
 
+    public static void setAmount_of_records(int am) throws IOException {
+        amount_of_records = am;
+        save_size();
+    }
 
-    public static void main(int amount_input) {
+    public static int getsizeoffile() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("sz_o_file.txt"));
+        String line = reader.readLine();
+        int size = Integer.parseInt(line);
+        reader.close();
+        return size;
+    }
 
-
-        try {
-            FileOutputStream f = new FileOutputStream(new File(pathname));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-
-            for(int i =0; i<amount_input;i++)
-            {
-                Random value = new Random();
-                    db_input input = new db_input(value.nextInt(amount_input+i), value.nextInt(10000));
-                // Write objects to file
-                o.writeObject(input);
-            }
-
-
-
-
-
-            o.close();
-            f.close();
-
-
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("Error initializing stream");
-        }
+    public static void save_size () throws IOException {
+        File sz = new File("sz_o_file.txt");
+        FileWriter fileWriter = new FileWriter(sz);
+        fileWriter.write(Integer.toString(amount_of_records));
+        fileWriter.close();
 
     }
 
+    public static void main(int amount_input) {
+                try {
+                    FileOutputStream f = new FileOutputStream(new File(pathname));
+                    ObjectOutputStream o = new ObjectOutputStream(f);
+                    ArrayList<Integer> get_indexes = new ArrayList<>();
+
+                    int counter =0;
+                    for (int i = 0; i < amount_input*2; i++) {
+                        Random value = new Random();
+                        int rand_index = value.nextInt(amount_input + i);
+                        if(!get_indexes.contains(rand_index)) {
+                            db_input input = new db_input(rand_index, value.nextInt(10000));
+                            get_indexes.add(rand_index);
+                            // Write objects to file
+                            o.writeObject(input);
+                            counter++;
+                        }
+
+                    }
+                    setAmount_of_records(counter);
+                    save_size();
+
+                    o.close();
+                    f.close();
+
+
+                } catch (FileNotFoundException e) {
+                    System.out.println("File not found");
+                } catch (IOException e) {
+                    System.out.println("Error initializing stream");
+                }
+            }
+
     public static ArrayList<db_input> read_file(int amount) throws IOException, ClassNotFoundException {
+        setAmount_of_records(getsizeoffile());
         FileInputStream fi = new FileInputStream(new File(pathname));
         ObjectInputStream oi = new ObjectInputStream(fi);
 
         // Read objects
         ArrayList<db_input> get_input = new ArrayList<>();
 
-
-        for(int i =0; i< amount;i++)
+        for(int i =0; i<amount_of_records;i++)
         {
-           get_input.add(i,(db_input) oi.readObject());
-
+           get_input.add(i, (db_input) oi.readObject());
         }
 
 
@@ -67,51 +88,6 @@ public class WriterReader {
         return get_input;
     }
 
-    public static ArrayList<db_input> deserealised_read()
-    {
-        ArrayList<db_input> emp = new ArrayList<>();
-        try
-        {
-            FileInputStream fileIn =new FileInputStream(pathname);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            int i =  0;
-            while (in.readObject()!=null) {
-                emp.add(i,(db_input)in.readObject());
-                i++;
-
-            }
-            in.close();
-            fileIn.close();
-        }catch(IOException | ClassNotFoundException i)
-        {
-            i.printStackTrace();
-        }
-
-        return emp;
-    }
-
-    public static void add_to_db(db_input additional_input)
-    {
-        try {
-            FileOutputStream f = new FileOutputStream(new File(pathname));
-            ObjectOutputStream o = new ObjectOutputStream(f);
-
-
-                db_input input = additional_input;
-                // Write objects to file
-                o.writeObject(input);
-
-            o.close();
-            f.close();
-
-
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("Error initializing stream");
-        }
-    }
 
     static void clean_file() throws IOException {
         new FileWriter(pathname, false).close();

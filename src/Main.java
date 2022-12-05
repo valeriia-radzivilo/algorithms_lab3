@@ -1,6 +1,7 @@
 import db.*;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,7 +11,10 @@ public class Main {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         JFrame frame= new JFrame("DB");
         int amount_of_records = 100;
-        WriterReader.main(amount_of_records);
+        File lab_file = new File("lab3_db.obj");
+        if(lab_file.length()==0)
+            WriterReader.main(amount_of_records);
+
         ArrayList<db_input> get_from_db = WriterReader.read_file(amount_of_records);
         ArrayList<db_input> sparse_get_from_db = new ArrayList<>();
 
